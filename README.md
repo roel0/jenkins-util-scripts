@@ -1,6 +1,6 @@
 # jenkins-util-scripts
 
-Scripts to be used in a jenkins pipeline as a shared library
+A collection of scripts, custom steps that can be used in a Jenkins pipeline 
 
 Some of the API's provided:
 
