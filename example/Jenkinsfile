@@ -23,5 +23,8 @@ condition = { it ->
     it != jenkins.model.Jenkins.instance && 
     !it.getNodeName().contains("tester")
 }
-run_on_multiple_nodes(cmd: "uname -a", condition: condition)
-println "Pipeline duration: ${get_job_duration()}"
+
+super_lock(['lock1', 'lock2']) {
+    run_on_multiple_nodes(cmd: "uname -a", condition: condition)
+    println "Pipeline duration: ${get_job_duration()}"
+}
