@@ -6,7 +6,8 @@ Some of the API's provided:
 
 * Add/Remove env variabels to a node
 * Delete jobs based on a condition
-* fetch plotting data form the current job
+* Fetch plotting data form the current job
+* Run a script on multiple slaves
 * ...
 
 ## Installation
