@@ -5,5 +5,5 @@
  */
 def call()
 {
-    return jenkins.model.Jenkins.instance.nodes
+    return jenkins.model.Jenkins.instance.nodes + jenkins.model.Jenkins.instance
 }
