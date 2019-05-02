@@ -1,0 +1,27 @@
+@Library("jenkins-util-scripts") _
+
+
+println "Nbr of slave nodes: ${get_nodes().size()}"
+println "First slave: ${get_node(get_nodes()[0].getNodeName())}"
+
+node("master")
+{
+    println "operating system master: ${get_os()}"
+
+    sh "echo 'testserie\n1'>test.csv"
+    plot csvFileName: 'plot-testplot.csv', group: 'group', style: 'line', title: 'testplot', 
+         csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'test.csv', inclusionFlag: 'OFF', url: '']]
+}
+
+println "Plot data: ${get_plot_data(plot: "testplot", serie: "testserie")}"
+
+add_node_env(node_name:"zeus", env_key:"iets", env_value:"value")
+remove_node_env(node_name:"zeus", env_key:"iets")
+
+// Condition == Not master and not slave with 'tester' in the name
+condition = { it ->
+    it != jenkins.model.Jenkins.instance && 
+    !it.getNodeName().contains("tester")
+}
+run_on_multiple_nodes(cmd: "uname -a", condition: condition)
+println "Pipeline duration: ${get_job_duration()}"
