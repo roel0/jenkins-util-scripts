@@ -18,9 +18,11 @@ println "Plot data: ${get_plot_data(plot: "testplot", serie: "testserie")}"
 add_node_env(node_name:"zeus", env_key:"iets", env_value:"value")
 remove_node_env(node_name:"zeus", env_key:"iets")
 
-// Condition == Not master and not slave with 'tester' in the name
+// Only run on linux slaves which have
+// the string 'tester' in their name
 condition = { it ->
-    it != jenkins.model.Jenkins.instance && 
+    it != jenkins.model.Jenkins.instance &&
+    it.toComputer().isUnix() &&
     !it.getNodeName().contains("tester")
 }
 
