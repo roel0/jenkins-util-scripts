@@ -30,3 +30,29 @@ super_lock(['lock1', 'lock2']) {
     run_on_multiple_nodes(cmd: "uname -a", condition: condition)
     println "Pipeline duration: ${get_job_duration()}"
 }
+
+node("master") {
+    def xml =  '''
+        <testsuite tests="3">
+            <testcase classname="foo1" name="bar1"/>
+            <testcase classname="foo2" name="bar2"/>
+            <testcase classname="foo3" name="bar3">
+                <failure type="nullpointer"> NULL </failure>
+                <system-out>beep beep ERROR beep beep</system-out>
+            </testcase>
+        </testsuite>
+    '''
+    writeFile file:"test.xml", text: xml
+    junit "test.xml"
+
+    def results = get_junit_results()
+
+    println "FAILED TC:"
+    println "=========="
+
+    for (def failed: results.failed) {
+        println "Name ${failed.name}"
+        println "Log: ${failed.log}"
+        println "-----"
+    }
+}
