@@ -8,6 +8,7 @@ Some of the API's provided:
 * Delete jobs based on a condition
 * Fetch plotting data form the current job
 * Run a script on multiple slaves
+* Extract details about test results (junit)
 * ...
 
 ## Installation
