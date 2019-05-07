@@ -1,5 +1,5 @@
 # jenkins-util-scripts  ![jj](http://i65.tinypic.com/33ol9mo.jpg)
-A collection of scripts, custom steps that can be used in a Jenkins pipeline
+A collection of scripts, custom steps that can be used in a Jenkins pipeline (declarative and scripted).
 
 Some of the API's provided:
 
