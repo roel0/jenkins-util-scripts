@@ -48,3 +48,25 @@ Jenkins default locking API only allows the locking of one resource at the time.
      // Do stuff
  }
 ```
+
+### get_junit_results
+
+Jenkins supports the parsing of junit fail to determine the build result. However the results are not directly available to be used in a various number of reporting plugins. For example if you want to share the test results through e-mail, slack, ...
+
+```groovy
+ junit "test.xml"
+
+ def results = get_junit_results()
+
+ println "FAILED TC:"
+ println "=========="
+
+ for (def failed: results.failed) {
+     println "Name ${failed.name}"
+     println "Log: ${failed.log}"
+     println "-----"
+ } 
+ ```
+ 
+ ### Other
+ See the [example](https://github.com/roel0/jenkins-util-scripts/blob/master/example/Jenkinsfile) for more examples ...
