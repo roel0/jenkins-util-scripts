@@ -27,6 +27,7 @@ It is possible to get a list of the failed stages. However this is only possible
 ```groovy
 try {
     super_stage("stage1") {
+        // Do stuff
     }
     super_stage("stage2") {
         error "oei"
