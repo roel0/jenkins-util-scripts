@@ -6,7 +6,7 @@ Some of the API's provided:
 
 * Add/Remove environment variabels to a node
 * Delete jobs based on a condition
-* Fetch plotting data form the current job
+* Fetch plotting data from the current job
 * Run a script on multiple slaves
 * Extract details about test results (junit)
 * Get a list of the failed stages
