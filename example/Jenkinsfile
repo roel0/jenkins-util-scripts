@@ -56,3 +56,14 @@ node("master") {
         println "-----"
     }
 }
+
+try {
+    super_stage("stage1") {
+    }
+    super_stage("stage2") {
+        error "oei"
+    }
+} catch(e) {
+}
+
+println "Failed stages: ${get_failed_stages().join(',')}"
