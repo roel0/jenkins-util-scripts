@@ -20,7 +20,7 @@ Add this repository as a [shared library](https://jenkins.io/doc/book/pipeline/s
 
 See the [example](https://github.com/roel0/jenkins-util-scripts/blob/master/example/Jenkinsfile) for more information.
 
-### Get_failed_stages
+### get_failed_stages
 
 It is possible to get a list of the failed stages. However this is only possible when the stages use the super_stage wrapper instead of directly using the stage API by jenkins.
 
@@ -37,3 +37,13 @@ try {
 println "Failed stages: ${get_failed_stages().join(',')}"
 ```
 This will print out => Failed stages: stage2
+
+### super_lock
+
+Jenkins default locking API only allows the locking of one resource at the time. This becomes especially an issue if the number of locks is dynamicly programmed. Super_lock is a wrapper arround that API that allows the locking of multiple resources at the same time.
+
+```groovy
+ super_lock(['lock1', 'lock2']) {
+     // Do stuff
+ }
+```
