@@ -71,14 +71,13 @@ Jenkins supports the parsing of junit fail to determine the build result. Howeve
  The plot plugin of jenkins is very minimalistic, it does exactly one thing and one thing only: plotting. However sometimes you would want to plot based on the previous data from the previous builds or you want to calculate the average:
  
  ```groovy
- 
 node("master")
 {
-    sh "echo 'job_duration\n${get_job_duration()}'>test.csv"
-    plot csvFileName: 'plot-jobduration.csv', group: 'group', style: 'line', title: 'Job duration', 
-         csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'test.csv', inclusionFlag: 'OFF', url: '']]
+   sh "echo 'job_duration\n${get_job_duration()}'>test.csv"
+   plot csvFileName: 'plot-jobduration.csv', group: 'group', style: 'line', title: 'Job duration', 
+        csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'test.csv', inclusionFlag: 'OFF', url: '']]
 }
-def plot_data = get_plot_data(plot: "jobduration", serie: "job_duration")
+def plot_data = get_plot_data(plot: "jobduration", serie: "job_duration").collect() { it.toBigDecimal() }
 println "Average job duration: ${plot_data.sum()/plot_data.size()}"
  ```
  
