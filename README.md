@@ -66,7 +66,7 @@ Jenkins supports the parsing of junit fail to determine the build result. Howeve
  } 
  ```
  
- ## get_plot_data
+ ### get_plot_data
  
  The plot plugin of jenkins is very minimalistic, it does exactly one thing and one thing only: plotting. However sometimes you would want to plot based on the previous data from the previous builds or you want to calculate the average:
  
