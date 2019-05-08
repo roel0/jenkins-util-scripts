@@ -32,9 +32,8 @@ try {
         error "oei"
     }
 } catch(e) {
+    println "Failed stages: ${get_failed_stages().join(',')}"
 }
-
-println "Failed stages: ${get_failed_stages().join(',')}"
 ```
 This will print out => Failed stages: stage2
 
