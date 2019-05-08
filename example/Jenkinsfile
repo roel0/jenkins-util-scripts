@@ -7,13 +7,7 @@ println "First slave: ${get_node(get_nodes()[0].getNodeName())}"
 node("master")
 {
     println "operating system master: ${get_os()}"
-
-    sh "echo 'testserie\n1'>test.csv"
-    plot csvFileName: 'plot-testplot.csv', group: 'group', style: 'line', title: 'testplot', 
-         csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'test.csv', inclusionFlag: 'OFF', url: '']]
 }
-
-println "Plot data: ${get_plot_data(plot: "testplot", serie: "testserie")}"
 
 add_node_env(node_name:"zeus", env_key:"iets", env_value:"value")
 remove_node_env(node_name:"zeus", env_key:"iets")
@@ -28,7 +22,6 @@ condition = { it ->
 
 super_lock(['lock1', 'lock2']) {
     run_on_multiple_nodes(cmd: "uname -a", condition: condition)
-    println "Pipeline duration: ${get_job_duration()}"
 }
 
 node("master") {
@@ -67,3 +60,12 @@ try {
 }
 
 println "Failed stages: ${get_failed_stages().join(',')}"
+
+node("master")
+{
+   sh "echo 'job_duration\n${get_job_duration()}'>test.csv"
+   plot csvFileName: 'plot-jobduration.csv', group: 'group', style: 'line', title: 'Job duration', 
+        csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'test.csv', inclusionFlag: 'OFF', url: '']]
+}
+def plot_data = get_plot_data(plot: "jobduration", serie: "job_duration").collect() { it.toBigDecimal() }
+println "Average job duration: ${plot_data.sum()/plot_data.size()}"
