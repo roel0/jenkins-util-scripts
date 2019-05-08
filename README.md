@@ -83,3 +83,6 @@ println "Average job duration: ${plot_data.sum()/plot_data.size()}"
  
  ### Other
  See the [example](https://github.com/roel0/jenkins-util-scripts/blob/master/example/Jenkinsfile) for more examples ...
+
+## Contributing 
+Feel free to fork and add your own pipeline 'hacks'
