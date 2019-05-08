@@ -74,7 +74,7 @@ Jenkins supports the parsing of junit fail to determine the build result. Howeve
  
 node("master")
 {
-    sh "echo 'job_duration\n${get_job_duration}'>test.csv"
+    sh "echo 'job_duration\n${get_job_duration()}'>test.csv"
     plot csvFileName: 'plot-jobduration.csv', group: 'group', style: 'line', title: 'Job duration', 
          csvSeries: [[displayTableFlag: false, exclusionValues: '', file: 'test.csv', inclusionFlag: 'OFF', url: '']]
 }
