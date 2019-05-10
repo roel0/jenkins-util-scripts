@@ -48,6 +48,9 @@ node("master") {
         println "Log: ${failed.log}"
         println "-----"
     }
+
+    def directories = run_script(script: "ls -w1", quiet: true, returnStdout: true)
+    println directories.split("\n").join(",")
 }
 
 try {
