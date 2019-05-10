@@ -46,7 +46,13 @@ Jenkins default locking API only allows the locking of one resource at the time.
      // Do stuff
  }
 ```
-
+### run_script
+Running scripts is a fundamental stone of jenkins, however sometimes a scripts is not critical for a jenkins pipeline but it still can pollute the logging of the pipeline because of the amount of output it prints to stdout. WIth the run_script API you can prevent this from happening. The run_script is also os independent.
+```groovy
+ def directories = run_script(script: "ls -w1", quiet: true, returnStdout: true)
+ println directories.split("\n").join(",")
+ ```
+ 
 ### get_junit_results
 
 Jenkins supports the parsing of junit fail to determine the build result. However the results are not directly available to be used in a various number of reporting plugins. For example if you want to share the test results through e-mail, slack, ...
